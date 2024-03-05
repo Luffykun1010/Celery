@@ -1,0 +1,28 @@
+<!-- In your template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Reload Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            function checkForUpdate(){
+                $.get('{% url 'check_update' %}', function(data){
+                    if (data.update_available){
+                        location.reload(); // Reload the page if an update is available
+                    }
+                });
+            }
+
+            // Poll for updates every 5 seconds (adjust as needed)
+            setInterval(checkForUpdate, 5000);
+        });
+    </script>
+</head>
+<body>
+    <h1>Automatic Reload Example</h1>
+    <!-- Your content here -->
+</body>
+</html>
